@@ -19,6 +19,7 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
     Button logoutBtn, permissionBtn;
     Spinner areaList;
     ArrayAdapter<CharSequence> adapterSpin;
+<<<<<<< HEAD
     String[] areaData = {"ê°•ë¦‰", "ê´‘ì£¼", "êµ°ì‚°", "ê¹?ì²?", "??ê´?? ¹", "??êµ?", "??? „",
             "?™?•´", "ë§ˆì‚°", "ëª©í¬", "ë°??–‘", "ë²Œêµ", "ë¶??‚°", "?„œê·??¬",
             "?„œ?‚°", "?„œ?š¸", "?„±?‚¨", "?†ì´?", "?ˆ˜?›", "?•ˆ?™", "?•ˆ?–‘",
@@ -26,6 +27,15 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
             "?š¸ì§?", "?›ì£?", "?˜?†¡", "?´ë¦?", "?¸ì²?", "? „ì£?", "? œì£?",
             "ë¶ì œì£?", "ì§„ì£¼", "ì§„í•´", "ì°½ì›", "ì²œì•ˆ", "ì² ì›", "ì¶”í’? ¹",
             "ì¶˜ì²œ", "ì¶©ë¬´", "ì¶©ì£¼", "?¬?•­", "?•´?‚¨"};
+=======
+    String[] areaData = {"°­¸ª", "±¤ÁÖ", "±º»ê", "±èÃµ", "´ë°ü·É", "´ë±¸", "´ëÀü",
+            "µ¿ÇØ", "¸¶»ê", "¸ñÆ÷", "¹Ð¾ç", "¹ú±³", "ºÎ»ê", "¼­±ÍÆ÷",
+            "¼­»ê", "¼­¿ï", "¼º³²", "¼ÓÃÊ", "¼ö¿ø", "¾Èµ¿", "¾È¾ç",
+            "¾ç¾ç", "¿©¼ö", "¿µ¿ù", "¿À»ê", "¿Ïµµ", "¿ï¸ªµµ", "¿ï»ê",
+            "¿ïÁø", "¿øÁÖ", "ÀÇ¼Û", "ÀÌ¸®", "ÀÎÃµ", "ÀüÁÖ", "Á¦ÁÖ",
+            "ºÏÁ¦ÁÖ", "ÁøÁÖ", "ÁøÇØ", "Ã¢¿ø", "Ãµ¾È", "Ã¶¿ø", "ÃßÇ³·É",
+            "ÃáÃµ", "Ãæ¹«", "ÃæÁÖ", "Æ÷Ç×", "ÇØ³²"};
+>>>>>>> 74e36130a3fcc92f0827b2ea0158af9b84286030
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +48,20 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
         permissionBtn.setOnClickListener(this);
 
         areaList = (Spinner)findViewById(R.id.area_list);
+<<<<<<< HEAD
         areaList.setPrompt("ì§??—­ ?„¤? •");
+=======
+        areaList.setPrompt("Áö¿ª ¼³Á¤");
+>>>>>>> 74e36130a3fcc92f0827b2ea0158af9b84286030
         areaList.setOnItemSelectedListener(this);
         adapterSpin = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, areaData);
         adapterSpin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         areaList.setAdapter(adapterSpin);
+<<<<<<< HEAD
         areaList.setSelection(15);      // defaultê°? = ?„œ?š¸
+=======
+        areaList.setSelection(15);      // default°ª = ¼­¿ï
+>>>>>>> 74e36130a3fcc92f0827b2ea0158af9b84286030
     }
 
     @Override
