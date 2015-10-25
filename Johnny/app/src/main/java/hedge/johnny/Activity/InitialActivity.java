@@ -95,8 +95,6 @@ public class InitialActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-
-
     }
 
     @Override
@@ -111,12 +109,11 @@ public class InitialActivity extends Activity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
-
                 //토큰값이 들어옴 이걸 서버로 보냄
                 String token = intent.getStringExtra("token");
                 JSONObject jsonObject = new JSONObject();
                 HedgeHttpClient.addValues(jsonObject,"devicekey", token);
-                jsonObject = HedgeHttpClient.GetInstance().HedgeRequest("set_device_key",jsonObject);
+                if(token != null)  jsonObject = HedgeHttpClient.GetInstance().HedgeRequest("set_device_key",jsonObject);
             }
         };
 
