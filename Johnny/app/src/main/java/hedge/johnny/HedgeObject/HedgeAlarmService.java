@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import hedge.johnny.Activity.TimeoutActivity;
 
@@ -20,13 +22,54 @@ public class HedgeAlarmService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
         pref = getSharedPreferences("HedgeMembers", 0);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.e("onStart", "on");
+
+
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        // 현재 Hour
+        SimpleDateFormat sdfHour = new SimpleDateFormat("H");
+        String strHour = sdfHour.format(date);
+        int intHour = Integer.parseInt(strHour);
+        // 현재 Min
+        SimpleDateFormat sdfMinute = new SimpleDateFormat("mm");
+        String strMinute = sdfMinute.format(date);
+
+
+        // 방해 금지 시간
+        String prefStart = pref.getString("permission_start", "null");      // AM 09:00
+        String[] prefStarr = prefStart.split(" ");
+        String[] prefStartTime = prefStarr[1].split(":");
+        float prefStartHour = Float.parseFloat(prefStartTime[0]);
+        float prefStartMin = Float.parseFloat(prefStartTime[1]);
+        prefStartHour += prefStartMin/60;
+        if(prefStarr[0].equals("PM"))
+            prefStartHour += 12;
+        String prefEnd = pref.getString("permission_end", "null");      // AM 09:00
+        String[] prefEndd = prefEnd.split(" ");
+        String[] prefEndTime = prefStarr[1].split(":");
+        float prefEndHour = Float.parseFloat(prefEndTime[0]);
+        float prefEndMin = Float.parseFloat(prefEndTime[1]);
+        prefEndHour += prefEndMin/60;
+        if(prefEndd[0].equals("PM"))
+            prefEndHour += 12;
+
+        if(true)
+            return 0;
+
+        // Check
+        if(prefStartHour > prefEndHour)
+            if((prefStartHour<intHour) || (prefEndHour>intHour))
+                return START_NOT_STICKY;
+            else
+            if((prefStartHour<intHour) && (prefEndHour>intHour))
+                return START_NOT_STICKY;
+
 
         //날씨 확인
         boolean weather = intent.getExtras().getString("weather_alarm").equals("1");
