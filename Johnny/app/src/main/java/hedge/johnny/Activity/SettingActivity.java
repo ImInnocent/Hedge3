@@ -19,13 +19,13 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
     Button logoutBtn, permissionBtn;
     Spinner areaList;
     ArrayAdapter<CharSequence> adapterSpin;
-    String[] areaData = {"ê°•ë¦‰", "ê´‘ì£¼", "êµ°ì‚°", "ê¹€ì²œ", "ëŒ€ê´€ë ¹", "ëŒ€êµ¬", "ëŒ€ì „",
-            "ë™í•´", "ë§ˆì‚°", "ëª©í¬", "ë°€ì–‘", "ë²Œêµ", "ë¶€ì‚°", "ì„œê·€í¬",
-            "ì„œì‚°", "ì„œìš¸", "ì„±ë‚¨", "ì†ì´ˆ", "ìˆ˜ì›", "ì•ˆë™", "ì•ˆì–‘",
-            "ì–‘ì–‘", "ì—¬ìˆ˜", "ì˜ì›”", "ì˜¤ì‚°", "ì™„ë„", "ìš¸ë¦‰ë„", "ìš¸ì‚°",
-            "ìš¸ì§„", "ì›ì£¼", "ì˜ì†¡", "ì´ë¦¬", "ì¸ì²œ", "ì „ì£¼", "ì œì£¼",
-            "ë¶ì œì£¼", "ì§„ì£¼", "ì§„í•´", "ì°½ì›", "ì²œì•ˆ", "ì² ì›", "ì¶”í’ë ¹",
-            "ì¶˜ì²œ", "ì¶©ë¬´", "ì¶©ì£¼", "í¬í•­", "í•´ë‚¨"};
+    String[] areaData = {"ê°•ë¦‰", "ê´‘ì£¼", "êµ°ì‚°", "ê¹?ì²?", "??ê´?? ¹", "??êµ?", "??? „",
+            "?™?•´", "ë§ˆì‚°", "ëª©í¬", "ë°??–‘", "ë²Œêµ", "ë¶??‚°", "?„œê·??¬",
+            "?„œ?‚°", "?„œ?š¸", "?„±?‚¨", "?†ì´?", "?ˆ˜?›", "?•ˆ?™", "?•ˆ?–‘",
+            "?–‘?–‘", "?—¬?ˆ˜", "?˜?›”", "?˜¤?‚°", "?™„?„", "?š¸ë¦‰ë„", "?š¸?‚°",
+            "?š¸ì§?", "?›ì£?", "?˜?†¡", "?´ë¦?", "?¸ì²?", "? „ì£?", "? œì£?",
+            "ë¶ì œì£?", "ì§„ì£¼", "ì§„í•´", "ì°½ì›", "ì²œì•ˆ", "ì² ì›", "ì¶”í’? ¹",
+            "ì¶˜ì²œ", "ì¶©ë¬´", "ì¶©ì£¼", "?¬?•­", "?•´?‚¨"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +38,12 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
         permissionBtn.setOnClickListener(this);
 
         areaList = (Spinner)findViewById(R.id.area_list);
-        areaList.setPrompt("ì§€ì—­ ì„¤ì •");
+        areaList.setPrompt("ì§??—­ ?„¤? •");
         areaList.setOnItemSelectedListener(this);
         adapterSpin = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, areaData);
         adapterSpin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         areaList.setAdapter(adapterSpin);
-        areaList.setSelection(15);      // defaultê°’ = ì„œìš¸
+        areaList.setSelection(15);      // defaultê°? = ?„œ?š¸
     }
 
     @Override
