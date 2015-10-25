@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import org.json.JSONObject;
+
+import hedge.johnny.HedgeObject.HttpClient.HedgeHttpClient;
 import hedge.johnny.R;
 /**
  * Created by Administrator on 2015-07-21.
@@ -22,6 +25,10 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         logoutBtn.setOnClickListener(this);
         permissionBtn = (Button)findViewById(R.id.permission);
         permissionBtn.setOnClickListener(this);
+
+//        JSONObject jsonObject = new JSONObject(); ³¯¾¾ Å×½ºÆ®
+//        HedgeHttpClient.addValues(jsonObject,"location","seourl");
+//        jsonObject = HedgeHttpClient.HedgeRequest("get_forecast",jsonObject);
     }
 
     @Override
