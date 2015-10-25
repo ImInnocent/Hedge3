@@ -19,13 +19,13 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
     Button logoutBtn, permissionBtn;
     Spinner areaList;
     ArrayAdapter<CharSequence> adapterSpin;
-    String[] areaData = {"ê°•ë¦‰", "ê´‘ì£¼", "êµ°ì‚°", "ê¹€ì²œ", "ëŒ€ê´€ë ¹", "ëŒ€êµ¬", "ëŒ€ì „",
-            "ë™í•´", "ë§ˆì‚°", "ëª©í¬", "ë°€ì–‘", "ë²Œêµ", "ë¶€ì‚°", "ì„œê·€í¬",
-            "ì„œì‚°", "ì„œìš¸", "ì„±ë‚¨", "ì†ì´ˆ", "ìˆ˜ì›", "ì•ˆë™", "ì•ˆì–‘",
-            "ì–‘ì–‘", "ì—¬ìˆ˜", "ì˜ì›”", "ì˜¤ì‚°", "ì™„ë„", "ìš¸ë¦‰ë„", "ìš¸ì‚°",
-            "ìš¸ì§„", "ì›ì£¼", "ì˜ì†¡", "ì´ë¦¬", "ì¸ì²œ", "ì „ì£¼", "ì œì£¼",
-            "ë¶ì œì£¼", "ì§„ì£¼", "ì§„í•´", "ì°½ì›", "ì²œì•ˆ", "ì² ì›", "ì¶”í’ë ¹",
-            "ì¶˜ì²œ", "ì¶©ë¬´", "ì¶©ì£¼", "í¬í•­", "í•´ë‚¨"};
+    String[] areaData = {"°­¸ª", "±¤ÁÖ", "±º»ê", "±èÃµ", "´ë°ü·É", "´ë±¸", "´ëÀü",
+            "µ¿ÇØ", "¸¶»ê", "¸ñÆ÷", "¹Ğ¾ç", "¹ú±³", "ºÎ»ê", "¼­±ÍÆ÷",
+            "¼­»ê", "¼­¿ï", "¼º³²", "¼ÓÃÊ", "¼ö¿ø", "¾Èµ¿", "¾È¾ç",
+            "¾ç¾ç", "¿©¼ö", "¿µ¿ù", "¿À»ê", "¿Ïµµ", "¿ï¸ªµµ", "¿ï»ê",
+            "¿ïÁø", "¿øÁÖ", "ÀÇ¼Û", "ÀÌ¸®", "ÀÎÃµ", "ÀüÁÖ", "Á¦ÁÖ",
+            "ºÏÁ¦ÁÖ", "ÁøÁÖ", "ÁøÇØ", "Ã¢¿ø", "Ãµ¾È", "Ã¶¿ø", "ÃßÇ³·É",
+            "ÃáÃµ", "Ãæ¹«", "ÃæÁÖ", "Æ÷Ç×", "ÇØ³²"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +38,12 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
         permissionBtn.setOnClickListener(this);
 
         areaList = (Spinner)findViewById(R.id.area_list);
-        areaList.setPrompt("ì§€ì—­ ì„¤ì •");
+        areaList.setPrompt("Áö¿ª ¼³Á¤");
         areaList.setOnItemSelectedListener(this);
         adapterSpin = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, areaData);
         adapterSpin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         areaList.setAdapter(adapterSpin);
-        areaList.setSelection(15);      // defaultê°’ = ì„œìš¸
+        areaList.setSelection(15);      // default°ª = ¼­¿ï
     }
 
     @Override
