@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:background="#ffffff"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:minHeight="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_weight="7"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="18dp"
+                android:textColor="#787878"
+                android:layout_gravity="left|center"
+                android:gravity="left|center"
+                android:text="알람 목록"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:onClick="btnClickAlarm"
+                android:id="@+id/btn_add_alarm"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/plus" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <View
+        android:background="#ff8a8a8a"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="4dp" />
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <!--친구 알람-->
+        <TextView
+            android:textSize="18dp"
+            android:textColor="#5d5d5d"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            android:text="친구에게 보낸 알람"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ListView
+            android:id="@+id/send_alarm_list"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="180dp" />
+
+        <!--내 알람-->
+        <TextView
+            android:textSize="18dp"
+            android:textColor="#5d5d5d"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:text="내 알람"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ListView
+            android:id="@+id/my_alarm_list"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="180dp" />
+        <!--android:background="#ffd9dff5"-->
+
+
+    </LinearLayout>
+
+</LinearLayout>

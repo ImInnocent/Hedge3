@@ -1,0 +1,44 @@
+//알람 해제
+	Intent intent = new Intent(this, HedgeAlarmService.class);
+	PendingIntent pender = PendingIntent.getService(this, tag, intent, 0);
+	alarm.cancel(pender);
+
+void setAlarm(int id){
+        //알람을 설정
+        //Intent intent = new Intent(this, TimeoutActivity.class);
+        Intent intent = new Intent(this, HedgeAlarmService.class);
+        intent.putExtra("repeat", mRepeat);    //intent에 요일 on/off정보를 넣음.
+        intent.putExtra("weather_alarm", mWeatherAlarm);
+        intent.putExtra("alarm_type", mAlarmType);
+        intent.putExtra("db_id", id);
+
+        //PendingIntent pender = PendingIntent.getActivity(this, id, intent, 0);
+        PendingIntent pender = PendingIntent.getService(this, id, intent, 0);
+
+        long OneDay = 24 * 60 * 60 * 1000;  //하루를 MilliSecond로 표현
+
+        Calendar current = Calendar.getInstance();
+        current.set(Calendar.SECOND, 0);
+        current.set(Calendar.MILLISECOND, 0);
+        long cTime = current.getTimeInMillis(); //currentTime = cTime
+
+        Calendar target = Calendar.getInstance();
+        target.set(Calendar.HOUR_OF_DAY, mHour);
+        target.set(Calendar.MINUTE, mMinute);
+        target.set(Calendar.SECOND, 0);
+        target.set(Calendar.MILLISECOND, 0);
+        long tTime = target.getTimeInMillis();  //targetTime = tTime
+
+        long trigger = cTime > tTime ? tTime + OneDay - cTime : tTime - cTime;
+
+        long intervalTime = OneDay; //하루마다 반복하고, 알람시 켜지는 클래스에서 요일반복을 처리한다.
+
+        //alarm.set(AlarmManager.RTC, System.currentTimeMillis() + 1000, pender);
+        alarm.setRepeating(AlarmManager.RTC_WAKEUP, cTime + trigger, intervalTime, pender);
+    }
+
+//알람 해제
+int id = myarray.get(index).getDb_Id();
+        Intent Intent = new Intent(this, TimeoutActivity.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, id, Intent, 0);
+        alarm.cancel(pIntent);

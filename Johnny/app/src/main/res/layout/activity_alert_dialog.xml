@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="#ffffff">
+
+    <TextView        android:text="to. asabe"
+        android:id="@+id/alert_who"
+        android:textColor="@android:color/white"
+        android:background="#553333"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/alert_edit"
+            android:layout_marginRight="15dp"
+            android:background="#eeeeee"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <ScrollView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <Button     android:id="@+id/btn_msg1"
+                    android:text="일어났어?"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <Button     android:id="@+id/btn_msg2"
+                    android:text="어디야"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <Button     android:id="@+id/btn_msg3"
+                    android:text="연락해"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <View
+        android:background="#999999"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <LinearLayout
+        android:background="#999999"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/alert_cancel"
+            android:text="취소"
+            android:background="#eeeeee"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_marginRight="0.5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/alert_send"
+            android:text="보내기"
+            android:background="#eeeeee"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:orientation="vertical" android:gravity="center|top"
+        android:layout_width="match_parent" android:layout_height="match_parent">
+
+        <TextView
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:textColor="#787878"
+            android:layout_gravity="left|center"
+            android:gravity="left|center"
+            android:text="알람 추가하기"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:background="#ff8a8a8a"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="4dp" />
+
+        <CheckBox
+            android:id="@+id/daynight_add_alarm"
+            android:button="@null"
+            android:drawableLeft="@drawable/alarm_daynight_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/hour_add_alarm"
+                android:textSize="60dp"
+                android:width="100dp"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text=" : "
+                android:textSize="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/minute_add_alarm"
+                android:width="100dp"
+                android:textSize="60dp"
+                android:gravity="center"
+                android:inputType="number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:button="@null"
+                android:gravity="center"
+                android:text="월"
+                android:textColor="@color/alarm_type_text_selector"
+                android:background="@drawable/alarm_day_selector"
+                android:id="@+id/day1_add_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:button="@null"
+                android:gravity="center"
+                android:text="화"
+                android:textColor="@color/alarm_type_text_selector"
+                android:background="@drawable/alarm_day_selector"
+                android:id="@+id/day2_add_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:button="@null"
+                android:gravity="center"
+                android:text="수"
+                android:textColor="@color/alarm_type_text_selector"
+                android:background="@drawable/alarm_day_selector"
+                android:id="@+id/day3_add_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:button="@null"
+                android:gravity="center"
+                android:text="목"
+                android:textColor="@color/alarm_type_text_selector"
+                android:background="@drawable/alarm_day_selector"
+                android:id="@+id/day4_add_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:button="@null"
+                android:gravity="center"
+                android:text="금"
+                android:textColor="@color/alarm_type_text_selector"
+                android:background="@drawable/alarm_day_selector"
+                android:id="@+id/day5_add_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:button="@null"
+                android:gravity="center"
+                android:text="토"
+                android:textColor="@color/alarm_type_text_selector"
+                android:background="@drawable/alarm_day_selector"
+                android:id="@+id/day6_add_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:button="@null"
+                android:gravity="center"
+                android:text="일"
+                android:textColor="@color/alarm_type_text_selector"
+                android:background="@drawable/alarm_day_selector"
+                android:id="@+id/day7_add_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="날씨알림"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:id="@+id/weather_add_alarm"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="매주 반복"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:id="@+id/repeat_add_alarm"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:layout_marginRight="2dp"
+                android:gravity="center"
+                android:height="30dp"
+                android:width="60dp"
+                android:button="@null"
+                android:text="소리"
+                android:textColor="@color/alarm_type_text_selector"
+                android:background="@drawable/alarm_type_selector"
+                android:id="@+id/sound_add_alarm"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:gravity="center"
+                android:width="100dp"
+                android:height="30dp"
+                android:button="@null"
+                android:text="소리 + 진동"
+                android:textColor="@color/alarm_type_text_selector"
+                android:background="@drawable/alarm_type_selector"
+                android:id="@+id/sound_vibe_add_alarm"
+                android:checked="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:layout_marginLeft="2dp"
+                android:gravity="center"
+                android:width="60dp"
+                android:height="30dp"
+                android:button="@null"
+                android:text="진동"
+                android:textColor="@color/alarm_type_text_selector"
+                android:background="@drawable/alarm_type_selector"
+                android:id="@+id/vibe_add_alarm"
+                android:checked="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="알람 글귀"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/msg_add_alarm"
+                android:text="일어나♥"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_cancel_add_alarm"
+                android:text="취소"
+                android:padding="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="#00ffffff"
+                android:onClick="btnClickAddAlarm"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="|"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_save_add_alarm"
+                android:text="저장"
+                android:padding="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#00ffffff"
+                android:onClick="btnClickAddAlarm"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

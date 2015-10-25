@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Johnny.iml" filepath="$PROJECT_DIR$/Johnny.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apache-httpcomponents-httpclien/apache-httpcomponents-httpclien.iml" filepath="$PROJECT_DIR$/apache-httpcomponents-httpclien/apache-httpcomponents-httpclien.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/httpcore-4.1/httpcore-4.1..iml" filepath="$PROJECT_DIR$/httpcore-4.1/httpcore-4.1..iml" />
+    </modules>
+  </component>
+</project>
+

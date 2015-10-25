@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:minHeight="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="15dp"
+                android:textColor="#787878"
+                android:layout_gravity="left|center"
+                android:gravity="left|center"
+                android:text="친구 추가하기"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:background="#898989"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="4dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|center_horizontal">
+
+            <EditText
+                android:width="200dp"
+                android:height="60dp"
+                android:id="@+id/friend_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:background="#d9dff5"
+                android:width="120dp"
+                android:height="60dp"
+                android:id="@+id/add_friend"
+                android:text="추가"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:minHeight="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:textSize="15dp"
+            android:textColor="#787878"
+            android:layout_gravity="left|center"
+            android:gravity="left|center"
+            android:text="받은 친구 요청"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:background="#898989"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="4dp" />
+
+        <ListView
+            android:id="@+id/friend_to_him"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffd9dff5"
+            android:layout_gravity="center_vertical"
+            android:focusable="false"></ListView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:minHeight="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:textSize="15dp"
+            android:textColor="#787878"
+            android:layout_gravity="left|center"
+            android:gravity="left|center"
+            android:text="보낸 친구 요청"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:background="#898989"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="4dp" />
+
+        <ListView
+            android:id="@+id/friend_to_me"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffd9dff5"
+            android:layout_gravity="center_vertical"
+            android:focusable="false"></ListView>
+
+    </LinearLayout>
+
+</LinearLayout>

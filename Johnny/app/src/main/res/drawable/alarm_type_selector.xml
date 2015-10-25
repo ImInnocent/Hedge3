@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--selected-->
+    <item
+        android:state_checked="true"
+        android:drawable="@color/selected"></item>
+
+    <!--unselected-->
+    <item
+        android:state_checked="false"
+        android:drawable="@color/unselected"></item>
+
+    <item
+        android:drawable="@color/default_color"></item>
+
+</selector>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
+    android:minHeight="50dp"
+    android:background="#d9dff5">
+
+    <LinearLayout
+        android:layout_weight="6"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:textColor="#002244"
+                android:id="@+id/head"
+                android:text="오전"
+                android:textSize="18dp"
+                android:layout_marginRight="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="#002244"
+                android:id="@+id/hour"
+                android:textSize="30dp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="#002244"
+                android:id="@+id/min"
+                android:textSize="30dp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="15dp"
+            android:gravity="center|bottom">
+
+            <TextView
+                android:id="@+id/d0"
+                android:textSize="16dp"
+                android:layout_marginRight="5dp"
+                android:text="월"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/d1"
+                android:textSize="16dp"
+                android:layout_marginRight="5dp"
+                android:text="화"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/d2"
+                android:textSize="16dp"
+                android:layout_marginRight="5dp"
+                android:text="수"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/d3"
+                android:textSize="16dp"
+                android:layout_marginRight="5dp"
+                android:text="목"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/d4"
+                android:textSize="16dp"
+                android:layout_marginRight="5dp"
+                android:text="금"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/d5"
+                android:textSize="16dp"
+                android:layout_marginRight="5dp"
+                android:text="토"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/d6"
+                android:textSize="16dp"
+                android:text="일"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_gravity="right"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <Switch
+            android:id="@+id/on_off"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

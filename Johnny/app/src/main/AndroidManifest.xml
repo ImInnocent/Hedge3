@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="hedge.johnny" >
+
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="23"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission android:name="com.example.gcm.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.example.gcm.permission.C2D_MESSAGE" />
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_johnny"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Light.NoTitleBar" >
+        <activity
+            android:name=".Activity.InitialActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.AlarmActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.FriendActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HedgeObject.Navigators.FriendNavigator"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HedgeObject.Navigators.AlarmNavigator"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.SettingActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.AddAlarmActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.SendAlarmActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.AddFriendActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.DeleteFriendActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.TimeoutActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.WeatherQuizActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.JoinActivity"
+            android:label="@string/title_activity_join"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".Activity.PermissionActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+
+        <service
+            android:name=".HedgeObject.HedgeAlarmService"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="hedge.johnny.HedObject.HedgeAlarmService" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".HedgeObject.AlarmBackgroundService"
+            android:label="backService" />
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="gcm.hedge.hedgcm" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name=".HedgeMessage.MyGcmListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".HedgeMessage.RegistrationIntentService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name=".HedgeObject.BootReciver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>

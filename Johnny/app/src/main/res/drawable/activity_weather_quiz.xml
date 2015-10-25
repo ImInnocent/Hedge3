@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:gravity="center"
+    android:background="#7d7baa">
+
+    <TextView
+        android:id="@+id/weaher_now_time"
+        android:text="08:10"
+        android:textSize="70dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="오늘의 날씨를 선택하세요"
+        android:textSize="22dp"
+        android:textColor="#ffffff"
+        android:paddingBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TableLayout
+        android:background="#ffffff"
+        android:padding="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TableRow>
+            <ImageButton
+                android:id="@+id/bSunny"
+                android:src="@drawable/sunny"
+                android:onClick="btn_quiz"
+                android:background="#7d7baa"
+                android:padding="10dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageButton
+                android:id="@+id/bCloud"
+                android:src="@drawable/cloud"
+                android:onClick="btn_quiz"
+                android:background="#7d7baa"
+                android:padding="10dp"
+                android:layout_marginBottom="3dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+        </TableRow>
+        <TableRow>
+            <ImageButton
+                android:id="@+id/bRain"
+                android:src="@drawable/rain"
+                android:onClick="btn_quiz"
+                android:background="#7d7baa"
+                android:padding="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+            <ImageButton
+                android:id="@+id/bSnow"
+                android:src="@drawable/snow"
+                android:onClick="btn_quiz"
+                android:background="#7d7baa"
+                android:padding="3dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:text="오늘의 날씨를 입력하세요"
+        android:textSize="22dp"
+        android:textColor="#ffffff"
+        android:padding="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:background="#ffffff"
+        android:padding="5dp"
+        android:layout_marginBottom="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/eWeatherInput"
+            android:ems="8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/weather_ok"
+            android:text="확인"
+            android:onClick="btn_quiz"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>
