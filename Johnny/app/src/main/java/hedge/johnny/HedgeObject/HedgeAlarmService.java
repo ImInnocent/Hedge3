@@ -44,32 +44,7 @@ public class HedgeAlarmService extends Service {
 
         // 방해 금지 시간
         String prefStart = pref.getString("permission_start", "null");      // AM 09:00
-<<<<<<< HEAD
-        String[] prefStarr = prefStart.split(" ");
-        String[] prefStartTime = prefStarr[1].split(":");
-        float prefStartHour = Float.parseFloat(prefStartTime[0]);
-        float prefStartMin = Float.parseFloat(prefStartTime[1]);
-        prefStartHour += prefStartMin/60;
-        if(prefStarr[0].equals("PM"))
-            prefStartHour += 12;
-        String prefEnd = pref.getString("permission_end", "null");      // AM 09:00
-        String[] prefEndd = prefEnd.split(" ");
-        String[] prefEndTime = prefStarr[1].split(":");
-        float prefEndHour = Float.parseFloat(prefEndTime[0]);
-        float prefEndMin = Float.parseFloat(prefEndTime[1]);
-        prefEndHour += prefEndMin/60;
-        if(prefEndd[0].equals("PM"))
-            prefEndHour += 12;
 
-        // Check
-        if(prefStartHour > prefEndHour) {
-            if ((prefStartHour < intHour) || (prefEndHour > intHour))
-                return START_NOT_STICKY;
-        }
-        else {
-            if ((prefStartHour < intHour) && (prefEndHour > intHour))
-                return START_NOT_STICKY;
-=======
         if(!prefStart.equals("null")) {
             String[] prefStarr = prefStart.split(" ");
             String[] prefStartTime = prefStarr[1].split(":");
@@ -95,10 +70,8 @@ public class HedgeAlarmService extends Service {
                 if ((prefStartHour < intHour) && (prefEndHour > intHour))
                     return START_NOT_STICKY;
             }
->>>>>>> 720826b73160aafc9d54150edac23f05ca3f812f
         }
-
-
+        
         //db확인
         String alarmid = intent.getExtras().getString("db_id");
 
