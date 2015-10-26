@@ -6,12 +6,15 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
 
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import hedge.johnny.Activity.TimeoutActivity;
+import hedge.johnny.HedgeObject.HttpClient.HedgeHttpClient;
 
 /**
  * Created by EDGE01 on 2015-08-14.
@@ -29,7 +32,6 @@ public class HedgeAlarmService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.e("onStart", "on");
 
-
         long now = System.currentTimeMillis();
         Date date = new Date(now);
         // 현재 Hour
@@ -39,7 +41,6 @@ public class HedgeAlarmService extends Service {
         // 현재 Min
         SimpleDateFormat sdfMinute = new SimpleDateFormat("mm");
         String strMinute = sdfMinute.format(date);
-
 
         // 방해 금지 시간
         String prefStart = pref.getString("permission_start", "null");      // AM 09:00
@@ -59,9 +60,6 @@ public class HedgeAlarmService extends Service {
         if(prefEndd[0].equals("PM"))
             prefEndHour += 12;
 
-        if(true)
-            return 0;
-
         // Check
         if(prefStartHour > prefEndHour) {
             if ((prefStartHour < intHour) || (prefEndHour > intHour))
@@ -74,7 +72,6 @@ public class HedgeAlarmService extends Service {
 
         //중첩 확인
 
-
         //날씨 확인
         boolean weather = intent.getExtras().getString("weather_alarm").equals("1");
 
@@ -86,6 +83,9 @@ public class HedgeAlarmService extends Service {
 
         ArrayList<String[]> src = new ArrayList<String[]>();
        // HedgeHttpClient.GetInstance().GetAlarmWithAlarmID(id, pw, alarmid, src);
+        JSONObject jsonObject = new JSONObject();
+        HedgeHttpClient.addValues(jsonObject,"alarmid",alarmid);
+        jsonObject = HedgeHttpClient.HedgeRequest("get_alarm_with_alarmid",jsonObject);
 
         if(src.get(0)[0].equals("Deleted") == true)
             return START_NOT_STICKY;
