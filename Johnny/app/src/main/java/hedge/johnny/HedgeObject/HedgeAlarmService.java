@@ -44,7 +44,7 @@ public class HedgeAlarmService extends Service {
 
         // 방해 금지 시간
         String prefStart = pref.getString("permission_start", "null");      // AM 09:00
-        if(!prefStart.equals(null)) {
+        if(!prefStart.equals("null")) {
             String[] prefStarr = prefStart.split(" ");
             String[] prefStartTime = prefStarr[1].split(":");
             float prefStartHour = Float.parseFloat(prefStartTime[0]);
@@ -69,43 +69,32 @@ public class HedgeAlarmService extends Service {
                 if ((prefStartHour < intHour) && (prefEndHour > intHour))
                     return START_NOT_STICKY;
             }
-
         }
 
 
-        //날씨 확인
-        boolean weather = intent.getExtras().getString("weather_alarm").equals("1");
-
         //db확인
         String alarmid = intent.getExtras().getString("db_id");
-        pref = getSharedPreferences("HedgeMembers", 0);
-        String id = pref.getString("userid", "None");
-        String pw = pref.getString("password", "None");
 
-        ArrayList<String[]> src = new ArrayList<String[]>();
        // HedgeHttpClient.GetInstance().GetAlarmWithAlarmID(id, pw, alarmid, src);
         JSONObject jsonObject = new JSONObject();
         HedgeHttpClient.addValues(jsonObject,"alarmid",alarmid);
         jsonObject = HedgeHttpClient.HedgeRequest("get_alarm_with_alarmid",jsonObject);
 
-        if(src.get(0)[0].equals("Deleted") == true)
-            return START_NOT_STICKY;
-
-        if(src.isEmpty())
-            return START_NOT_STICKY;
-        String[] alarminfo = src.get(0);
+        //if(src.get(0)[0].equals("Deleted") == true)
+            //return START_NOT_STICKY;
 
         //on/off 확인
-        if(alarminfo[6].equals("0"))
+        if(HedgeHttpClient.getValues(jsonObject,"on_off").equals("false"))
             return START_NOT_STICKY;
 
         //반복 확인
-        boolean repeat = Integer.parseInt(alarminfo[7]) == 1;
+        boolean repeat = HedgeHttpClient.getValues(jsonObject,"repeating").equals("true");
 
         //요일 확인
         boolean day[] = new boolean[7];
+        String temp = HedgeHttpClient.getValues(jsonObject,"day");
         for(int i=0; i < 7; i++){
-            String a = Character.toString(alarminfo[3].charAt(i));
+            String a = Character.toString(temp.charAt(i));
             day[i] = Integer.parseInt(a) == 1;
         }
 
@@ -120,6 +109,8 @@ public class HedgeAlarmService extends Service {
             }
         }
 
+        boolean weather = Boolean.parseBoolean(HedgeHttpClient.getValues(jsonObject, "weather"));
+
 
         if(!repeat && day[today]){
             //반복하지 않으므로 해당 요일을 지운다.
@@ -132,7 +123,6 @@ public class HedgeAlarmService extends Service {
 
             //알람 시작
             startTimeout(weather, intent);
-
             return START_NOT_STICKY;
         }
         else if(day[today] == false){

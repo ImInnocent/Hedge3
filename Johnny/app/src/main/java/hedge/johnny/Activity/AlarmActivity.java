@@ -178,16 +178,17 @@ public class AlarmActivity extends NavigationActivity {
             {
                 int index = (Integer)v.getTag();
                 String alarmid = String.valueOf(index);
-                //서버에 삭제를 요청
-                // HedgeHttpClient.GetInstance().DeleteAlarm(id,pw,alarmid);
-                JSONObject jsonObject = new JSONObject();
-                HedgeHttpClient.addValues(jsonObject,"alarmid",alarmid);
-                jsonObject = HedgeHttpClient.HedgeRequest("delete_alarm",jsonObject);
 
                 JSONObject jsonAU = new JSONObject();
                 HedgeHttpClient.addValues(jsonAU, "alarmid",alarmid);
                 HedgeHttpClient.addValues(jsonAU, "state","3");
                 jsonAU = HedgeHttpClient.HedgeRequest("insert_alarm_update", jsonAU);
+
+                //서버에 삭제를 요청
+                // HedgeHttpClient.GetInstance().DeleteAlarm(id,pw,alarmid);
+                JSONObject jsonObject = new JSONObject();
+                HedgeHttpClient.addValues(jsonObject,"alarmid",alarmid);
+                jsonObject = HedgeHttpClient.HedgeRequest("delete_alarm",jsonObject);
 
                 refresh();
                 //Toast.makeText(getApplicationContext(), (Integer)v.getTag() + " del", Toast.LENGTH_SHORT).show();
