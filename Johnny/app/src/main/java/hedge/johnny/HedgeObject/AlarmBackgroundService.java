@@ -49,11 +49,6 @@ public class AlarmBackgroundService extends Service implements Runnable{
 
     private void checkChanges(){
         try {
-            SharedPreferences pref = getSharedPreferences("HedgeMembers", 0);
-            String id = pref.getString("userid", "None");
-            String pw = pref.getString("password", "None");
-            HedgeHttpClient.GetInstance().SetAccount(id, pw);
-
             JSONObject jsonObject = new JSONObject();
             jsonObject = HedgeHttpClient.HedgeRequest("ensure_member", jsonObject);
             if (HedgeHttpClient.getValues(jsonObject, "result").equals("1") == false) return;
@@ -73,11 +68,9 @@ public class AlarmBackgroundService extends Service implements Runnable{
                     cancelAlarm(Integer.parseInt(alarmid));
                 } else if (state.equals("2")) {
                     cancelAlarm(Integer.parseInt(alarmid));
-                    JSONObject alarmJson = HedgeHttpClient.getObject(row, "alarm");
-                    setAlarm(alarmJson, alarmid);
+                    setAlarm(alarmid);
                 } else {
-                    JSONObject alarmJson = HedgeHttpClient.getObject(row, "alarm");
-                    setAlarm(alarmJson, alarmid);
+                    setAlarm(alarmid);
                 }
                 Log.e("Thread Running : " + alarmid + "알람매니저와 동기화시키기", "ok");
             }
@@ -99,7 +92,11 @@ public class AlarmBackgroundService extends Service implements Runnable{
         alarm.cancel(pender);
     }
 
-    private void setAlarm(JSONObject alarminfo, String alarmId){
+    private void setAlarm(String alarmId){
+        JSONObject alarminfo = new JSONObject();
+        HedgeHttpClient.addValues(alarminfo,"alarmid",alarmId);
+        alarminfo = HedgeHttpClient.HedgeRequest("get_alarm_with_alarmid", alarminfo);
+
         Intent intent = new Intent(this, HedgeAlarmService.class);
         intent.putExtra("repeat", HedgeHttpClient.getValues(alarminfo,"repeating"));    //intent에 요일 on/off정보를 넣음.
         intent.putExtra("weather_alarm",HedgeHttpClient.getValues(alarminfo,"weather"));
