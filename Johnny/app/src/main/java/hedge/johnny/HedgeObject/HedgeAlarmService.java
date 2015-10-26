@@ -63,12 +63,16 @@ public class HedgeAlarmService extends Service {
             return 0;
 
         // Check
-        if(prefStartHour > prefEndHour)
-            if((prefStartHour<intHour) || (prefEndHour>intHour))
+        if(prefStartHour > prefEndHour) {
+            if ((prefStartHour < intHour) || (prefEndHour > intHour))
                 return START_NOT_STICKY;
-            else
-            if((prefStartHour<intHour) && (prefEndHour>intHour))
+        }
+        else {
+            if ((prefStartHour < intHour) && (prefEndHour > intHour))
                 return START_NOT_STICKY;
+        }
+
+        //중첩 확인
 
 
         //날씨 확인
@@ -76,7 +80,7 @@ public class HedgeAlarmService extends Service {
 
         //db확인
         String alarmid = intent.getExtras().getString("db_id");
-        SharedPreferences pref = getSharedPreferences("HedgeMembers", 0);
+        pref = getSharedPreferences("HedgeMembers", 0);
         String id = pref.getString("userid", "None");
         String pw = pref.getString("password", "None");
 
@@ -120,8 +124,6 @@ public class HedgeAlarmService extends Service {
             String[] st,et;
             st = pref.getString("permission_start", "PM/12:00").split("/");
             et = pref.getString("permission_end", "PM/6:00").split("/");
-
-
         }
 
 
@@ -155,6 +157,11 @@ public class HedgeAlarmService extends Service {
     }
 
     private void startTimeout(boolean weather, Intent intent){
+        SharedPreferences pref = getSharedPreferences("isAlarming", 0);
+        if( pref.getBoolean("isAlarming", false) ) {
+            return;
+        }
+
         Intent send = new Intent(this, TimeoutActivity.class);
         send.putExtra("weather_alarm", weather);
         send.putExtra("alarm_type", intent.getExtras().getString("alarm_type"));
