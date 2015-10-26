@@ -3,6 +3,7 @@ package hedge.johnny.Activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
@@ -25,6 +26,7 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import hedge.johnny.HedgeObject.HttpClient.HedgeHttpClient;
 import hedge.johnny.HedgeObject.HttpClient.WeatherHttpClient;
 import hedge.johnny.HedgeObject.Weather;
 import hedge.johnny.HedgeObject.WeatherForecast;
@@ -49,6 +51,11 @@ public class TimeoutActivity extends Activity implements OnInitListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences pref = getSharedPreferences("isAlarming", 0);
+        SharedPreferences.Editor edit = pref.edit();
+        edit.putBoolean("isAlarming", true);
+        edit.commit();
 
         PowerManager pm = (PowerManager) getSystemService( Context.POWER_SERVICE );
         PowerManager.WakeLock wakeLock = pm.newWakeLock( PowerManager.SCREEN_BRIGHT_WAKE_LOCK|
