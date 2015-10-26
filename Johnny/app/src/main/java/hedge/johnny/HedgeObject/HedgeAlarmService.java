@@ -59,9 +59,6 @@ public class HedgeAlarmService extends Service {
         if(prefEndd[0].equals("PM"))
             prefEndHour += 12;
 
-        if(true)
-            return 0;
-
         // Check
         if(prefStartHour > prefEndHour) {
             if ((prefStartHour < intHour) || (prefEndHour > intHour))
