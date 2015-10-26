@@ -44,33 +44,34 @@ public class HedgeAlarmService extends Service {
 
         // 방해 금지 시간
         String prefStart = pref.getString("permission_start", "null");      // AM 09:00
-        String[] prefStarr = prefStart.split(" ");
-        String[] prefStartTime = prefStarr[1].split(":");
-        float prefStartHour = Float.parseFloat(prefStartTime[0]);
-        float prefStartMin = Float.parseFloat(prefStartTime[1]);
-        prefStartHour += prefStartMin/60;
-        if(prefStarr[0].equals("PM"))
-            prefStartHour += 12;
-        String prefEnd = pref.getString("permission_end", "null");      // AM 09:00
-        String[] prefEndd = prefEnd.split(" ");
-        String[] prefEndTime = prefStarr[1].split(":");
-        float prefEndHour = Float.parseFloat(prefEndTime[0]);
-        float prefEndMin = Float.parseFloat(prefEndTime[1]);
-        prefEndHour += prefEndMin/60;
-        if(prefEndd[0].equals("PM"))
-            prefEndHour += 12;
+        if(!prefStart.equals(null)) {
+            String[] prefStarr = prefStart.split(" ");
+            String[] prefStartTime = prefStarr[1].split(":");
+            float prefStartHour = Float.parseFloat(prefStartTime[0]);
+            float prefStartMin = Float.parseFloat(prefStartTime[1]);
+            prefStartHour += prefStartMin / 60;
+            if (prefStarr[0].equals("PM"))
+                prefStartHour += 12;
+            String prefEnd = pref.getString("permission_end", "null");      // AM 09:00
+            String[] prefEndd = prefEnd.split(" ");
+            String[] prefEndTime = prefStarr[1].split(":");
+            float prefEndHour = Float.parseFloat(prefEndTime[0]);
+            float prefEndMin = Float.parseFloat(prefEndTime[1]);
+            prefEndHour += prefEndMin / 60;
+            if (prefEndd[0].equals("PM"))
+                prefEndHour += 12;
 
-        // Check
-        if(prefStartHour > prefEndHour) {
-            if ((prefStartHour < intHour) || (prefEndHour > intHour))
-                return START_NOT_STICKY;
-        }
-        else {
-            if ((prefStartHour < intHour) && (prefEndHour > intHour))
-                return START_NOT_STICKY;
+            // Check
+            if (prefStartHour > prefEndHour) {
+                if ((prefStartHour < intHour) || (prefEndHour > intHour))
+                    return START_NOT_STICKY;
+            } else {
+                if ((prefStartHour < intHour) && (prefEndHour > intHour))
+                    return START_NOT_STICKY;
+            }
+
         }
 
-        //중첩 확인
 
         //날씨 확인
         boolean weather = intent.getExtras().getString("weather_alarm").equals("1");
@@ -117,13 +118,6 @@ public class HedgeAlarmService extends Service {
                 flag = true;
                 break;
             }
-        }
-
-        if(pref.getString("permission_onoff", "off") == "on")
-        {
-            String[] st,et;
-            st = pref.getString("permission_start", "PM/12:00").split("/");
-            et = pref.getString("permission_end", "PM/6:00").split("/");
         }
 
 
