@@ -76,7 +76,6 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
         }
     }
 
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(getApplicationContext(), "Selected " + areaData[position], Toast.LENGTH_SHORT).show();
