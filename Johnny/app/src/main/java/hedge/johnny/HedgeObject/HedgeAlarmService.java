@@ -71,7 +71,7 @@ public class HedgeAlarmService extends Service {
                     return START_NOT_STICKY;
             }
         }
-        
+
         //db확인
         String alarmid = intent.getExtras().getString("db_id");
 
