@@ -36,11 +36,11 @@ public class PermissionActivity extends Activity implements View.OnClickListener
         tvStart = (TextView) findViewById(R.id.pms_tv_start);
         tvEnd = (TextView) findViewById(R.id.pms_tv_end);
 
-        // 알람 금지를 켰는지 껐는지 서버와 통신해서 셋팅
+        // 알람 금지 시간대에 대한 정보 불러오기
         pref = getSharedPreferences("HedgeMembers", 0);
         startBtn.setText(pref.getString("permission_start", "PM 12:00"));       // 시작시간 불러옴
         endBtn.setText(pref.getString("permission_end", "PM 6:00"));           // 종료시간 불러옴
-        if(pref.getString("permission_onoff", "") == "on")              // onoff 유무 불러옴
+        if(pref.getString("permission_onoff", "").equals("on"))              // onoff 유무 불러옴
             tgBtn.setChecked(true);
         else
             tgBtn.setChecked(false);
@@ -117,22 +117,19 @@ public class PermissionActivity extends Activity implements View.OnClickListener
         Button btn;
         SharedPreferences.Editor edit = pref.edit();
 
-        switch (tag)
-        {
-            case "time_start":
-                btn = (Button)findViewById(R.id.pms_Start1);    // time 다이얼로그에 따라 텍스트 변경
-                btn.setText(str);
-                // Preferences 변수에 저장
-                edit.putString("permission_start", str);
-                break;
-            case "time_end":
-                btn = (Button)findViewById(R.id.pms_End1);
-                btn.setText(str);
-                edit.putString("permission_end", str);
-                break;
-            default:
-                break;
+        if (tag.equals("time_start")) {
+            btn = (Button) findViewById(R.id.pms_Start1);    // time 다이얼로그에 따라 텍스트 변경
+            btn.setText(str);
+            // Preferences 변수에 저장
+            edit.putString("permission_start", str);
+
+        } else if (tag.equals("time_end")) {
+            btn = (Button) findViewById(R.id.pms_End1);
+            btn.setText(str);
+            edit.putString("permission_end", str);
+
         }
+
         edit.commit();
     }
 }
