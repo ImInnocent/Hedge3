@@ -71,9 +71,9 @@ public class HedgeAlarmService extends Service {
             }
         }
 
-
         //db확인
         String alarmid = intent.getExtras().getString("db_id");
+        if(alarmid == null) return START_NOT_STICKY;
 
        // HedgeHttpClient.GetInstance().GetAlarmWithAlarmID(id, pw, alarmid, src);
         JSONObject jsonObject = new JSONObject();
@@ -93,6 +93,10 @@ public class HedgeAlarmService extends Service {
         //요일 확인
         boolean day[] = new boolean[7];
         String temp = HedgeHttpClient.getValues(jsonObject,"day");
+        if(temp == "Fail") {
+            int z = 5;
+            return START_NOT_STICKY;
+        }
         for(int i=0; i < 7; i++){
             String a = Character.toString(temp.charAt(i));
             day[i] = Integer.parseInt(a) == 1;
