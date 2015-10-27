@@ -13,8 +13,11 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.util.Calendar;
 
+import hedge.johnny.HedgeObject.HttpClient.HedgeHttpClient;
 import hedge.johnny.R;
 
 public class MyDialog extends DialogFragment implements TimePickerDialog.OnTimeSetListener, View.OnClickListener{
@@ -91,6 +94,10 @@ public class MyDialog extends DialogFragment implements TimePickerDialog.OnTimeS
                 // 메세지 내용 : edit.getText().toString()
 
                 Toast.makeText(theView.getContext(), friendId + "\n" + edit.getText().toString(), Toast.LENGTH_SHORT).show();
+                JSONObject jsonObject = new JSONObject();
+                HedgeHttpClient.addValues(jsonObject,"message", edit.getText().toString());
+                HedgeHttpClient.addValues(jsonObject,"friendid",friendId);
+                jsonObject = HedgeHttpClient.GetInstance().HedgeRequest("send_push",jsonObject);
 
                 alert.cancel();
                 break;
