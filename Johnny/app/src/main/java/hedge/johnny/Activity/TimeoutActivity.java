@@ -236,6 +236,11 @@ public class TimeoutActivity extends Activity implements OnInitListener {
 
         if(vibe.hasVibrator())
             vibe.cancel();
+
+        SharedPreferences pref = getSharedPreferences("isAlarming", 0);
+        SharedPreferences.Editor edit = pref.edit();
+        edit.putBoolean("isAlarming", false);
+        edit.commit();
     }
 
     public void SpeeachWeather(WeatherForecast speechData)
