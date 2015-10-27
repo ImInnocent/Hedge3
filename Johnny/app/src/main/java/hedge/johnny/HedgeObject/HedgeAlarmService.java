@@ -146,12 +146,6 @@ public class HedgeAlarmService extends Service {
     }
 
     private void startTimeout(boolean weather, Intent intent){
-        SharedPreferences pref = getSharedPreferences("isAlarming", 0);
-        boolean flag = pref.getBoolean("isAlarming", false);
-        if( flag ) {
-           return;
-        }
-
         Intent send = new Intent(this, TimeoutActivity.class);
         send.putExtra("weather_alarm", weather);
         send.putExtra("alarm_type", intent.getExtras().getString("alarm_type"));
