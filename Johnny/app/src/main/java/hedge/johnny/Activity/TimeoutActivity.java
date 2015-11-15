@@ -26,7 +26,6 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import hedge.johnny.HedgeObject.HttpClient.HedgeHttpClient;
 import hedge.johnny.HedgeObject.HttpClient.WeatherHttpClient;
 import hedge.johnny.HedgeObject.Weather;
 import hedge.johnny.HedgeObject.WeatherForecast;
@@ -237,6 +236,14 @@ public class TimeoutActivity extends Activity implements OnInitListener {
         if(vibe.hasVibrator())
             vibe.cancel();
 
+        SharedPreferences pref = getSharedPreferences("isAlarming", 0);
+        SharedPreferences.Editor edit = pref.edit();
+        edit.putBoolean("isAlarming", false);
+        edit.commit();
+    }
+
+    @Override
+    protected void onDestroy(){
         SharedPreferences pref = getSharedPreferences("isAlarming", 0);
         SharedPreferences.Editor edit = pref.edit();
         edit.putBoolean("isAlarming", false);

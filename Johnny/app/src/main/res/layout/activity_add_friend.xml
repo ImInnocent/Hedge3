@@ -62,6 +62,16 @@
 
         </LinearLayout>
 
+        <Button
+            android:background="#d9dff5"
+            android:width="120dp"
+            android:height="60dp"
+            android:id="@+id/phone_book"
+            android:text="전화번호부에서 찾기"
+            android:onClick="btnClickAddFriend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <LinearLayout

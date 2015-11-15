@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import hedge.johnny.HedgeObject.HttpClient.HedgeHttpClient;
@@ -30,10 +29,6 @@ public class MyDialog extends DialogFragment implements TimePickerDialog.OnTimeS
     View theView;           // 버튼 리스너 등록을 위해
     AlertDialog alert;      // alert 종료를 위해
     String friendId;
-
-    ArrayList mSelectedItems;
-
-    void launchAddItems(){}
 
     public MyDialog() {
         super();

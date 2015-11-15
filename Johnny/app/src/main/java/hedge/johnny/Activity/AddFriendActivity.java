@@ -37,6 +37,44 @@ public class AddFriendActivity extends NavigationActivity implements OnClickList
     //to_me가 내게 온 요청, to_him이 내가 보낸 요청
     ArrayList<String[]> to_me, to_him;
 
+    ArrayList mSelectedItems;
+
+    void  launchAddItems() {
+        mSelectedItems = new ArrayList();
+        final String items[] = {"Android","Iphone","Nokia"};
+
+        AlertDialog.Builder ab=new AlertDialog.Builder(getParent());
+        ab.setTitle("Dialog Title")
+                .setMultiChoiceItems(items, null,  new DialogInterface.OnMultiChoiceClickListener(){
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                        if (isChecked){
+                            mSelectedItems.add(which);
+                        }
+                        else if(mSelectedItems.contains(which)){
+                            mSelectedItems.remove(Integer.valueOf(which));
+                        }
+                    }
+
+                }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK, so save the mSelectedItems results somewhere
+                // or return them to the component that opened the dialog
+            }
+        }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+
+        ab.create();;
+
+
+        ab.show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +173,9 @@ public class AddFriendActivity extends NavigationActivity implements OnClickList
                 jsonObject = HedgeHttpClient.GetInstance().HedgeRequest("accept_friend",jsonObject);
                 refresh();
                 break;
+            case R.id.phone_book:
+                launchAddItems();
+                break;
         }
     }
 
@@ -179,7 +220,6 @@ public class AddFriendActivity extends NavigationActivity implements OnClickList
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         }
-
     }
 }
 
