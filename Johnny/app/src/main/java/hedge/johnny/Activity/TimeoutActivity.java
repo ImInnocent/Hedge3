@@ -3,6 +3,7 @@ package hedge.johnny.Activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
@@ -25,6 +26,7 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import hedge.johnny.HedgeObject.HttpClient.HedgeHttpClient;
 import hedge.johnny.HedgeObject.HttpClient.WeatherHttpClient;
 import hedge.johnny.HedgeObject.Weather;
 import hedge.johnny.HedgeObject.WeatherForecast;
@@ -49,6 +51,11 @@ public class TimeoutActivity extends Activity implements OnInitListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences pref = getSharedPreferences("isAlarming", 0);
+        SharedPreferences.Editor edit = pref.edit();
+        edit.putBoolean("isAlarming", true);
+        edit.commit();
 
         PowerManager pm = (PowerManager) getSystemService( Context.POWER_SERVICE );
         PowerManager.WakeLock wakeLock = pm.newWakeLock( PowerManager.SCREEN_BRIGHT_WAKE_LOCK|
@@ -229,6 +236,11 @@ public class TimeoutActivity extends Activity implements OnInitListener {
 
         if(vibe.hasVibrator())
             vibe.cancel();
+
+        SharedPreferences pref = getSharedPreferences("isAlarming", 0);
+        SharedPreferences.Editor edit = pref.edit();
+        edit.putBoolean("isAlarming", false);
+        edit.commit();
     }
 
     public void SpeeachWeather(WeatherForecast speechData)
@@ -256,9 +268,9 @@ public class TimeoutActivity extends Activity implements OnInitListener {
         int maxVol = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         am.setStreamVolume(AudioManager.STREAM_MUSIC, maxVol, AudioManager.FLAG_PLAY_SOUND);
 
-        String temp = "8월 26일, " + getResources().getString(R.string.now_time) + "시의 서울 날씨는, 구름입니다. ";
+        String temp = "10월 27일, " + "6" + "시의 서울 날씨는, 맑음입니다. ";
         myTTS.speak(temp, TextToSpeech.QUEUE_FLUSH, null);
-        temp = ", 기온은 섭씨 25도, 최저기온은 20도, 최고기온은 25도, 입니다.";
+        temp = ", 기온은 섭씨 13도, 최저기온은 12도, 최고기온은 16도, 입니다.";
         myTTS.speak(temp, TextToSpeech.QUEUE_ADD, null);
     }
 

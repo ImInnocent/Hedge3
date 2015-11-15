@@ -19,6 +19,9 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
     Button logoutBtn, permissionBtn;
     Spinner areaList;
     ArrayAdapter<CharSequence> adapterSpin;
+    SharedPreferences pref;
+    SharedPreferences.Editor edit;
+    int selectAreaNum;
 
     String[] areaData = {"강릉", "광주", "군산", "김천", "대관령", "대구", "대전",
             "동해", "마산", "목포", "밀양", "벌교", "부산", "서귀포",
@@ -47,7 +50,18 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
         adapterSpin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         areaList.setAdapter(adapterSpin);
 
-        areaList.setSelection(15);      // default값 = 서울
+
+        pref = getSharedPreferences("HedgeMembers", 0);
+        edit = pref.edit();
+        selectAreaNum = pref.getInt("WeatherArea", -1);
+        if(selectAreaNum == -1) {
+            edit.putInt("WeatherArea", 15);      // default값 = 서울
+            edit.commit();
+        }
+        else
+        {
+            areaList.setSelection(selectAreaNum);
+        }
     }
 
     @Override
@@ -76,10 +90,11 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
         }
     }
 
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(getApplicationContext(), "Selected " + areaData[position], Toast.LENGTH_SHORT).show();
+        edit.putInt("WeatherArea", position);      // default값 = 서울
+        edit.commit();
     }
 
     @Override
