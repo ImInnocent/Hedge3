@@ -10,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import hedge.johnny.HedgeObject.HttpClient.HedgeHttpClient;
@@ -28,6 +30,10 @@ public class MyDialog extends DialogFragment implements TimePickerDialog.OnTimeS
     View theView;           // 버튼 리스너 등록을 위해
     AlertDialog alert;      // alert 종료를 위해
     String friendId;
+
+    ArrayList mSelectedItems;
+
+    void launchAddItems(){}
 
     public MyDialog() {
         super();
@@ -54,6 +60,9 @@ public class MyDialog extends DialogFragment implements TimePickerDialog.OnTimeS
             LayoutInflater inflater = getActivity().getLayoutInflater();
             theView = inflater.inflate(R.layout.activity_alert_dialog, null);
             builder.setView(theView);
+
+            TextView name = (TextView)theView.findViewById(R.id.alert_who);
+            name.setText(friendId);
 
             alertInit();
             alert =  builder.create();

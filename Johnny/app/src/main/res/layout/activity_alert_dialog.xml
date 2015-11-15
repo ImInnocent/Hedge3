@@ -3,7 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="#ffffff">
 
-    <TextView        android:text="to. asabe"
+    <TextView
+        android:text="to. asabe"
         android:id="@+id/alert_who"
         android:textColor="@android:color/white"
         android:background="#553333"
