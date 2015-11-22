@@ -2,8 +2,10 @@ package hedge.johnny.Activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.view.View;
@@ -11,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.regex.Pattern;
@@ -137,6 +138,9 @@ public class JoinActivity extends Activity implements View.OnClickListener {
     };
 
     boolean checkEditText(){
+        TelephonyManager telManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        String phoneNum = telManager.getLine1Number();
+
         if(username.getText().toString().length() < 1)   // 이름은 1자~10자
             errorMsg = "이름은 최소 1자 이상 써야 합니다.";
         else if(userid.getText().toString().length() < 5)     // 아이디는 5자~18자
@@ -145,6 +149,8 @@ public class JoinActivity extends Activity implements View.OnClickListener {
             errorMsg = "비밀번호는 최소 5자 이상 써야 합니다.";
         else if(phonenum.getText().toString().length() < 10)
             errorMsg = "전화번호는 10자리 이상 써야 합니다.";
+        else if (!phonenum.getText().toString().equals(phoneNum))
+            errorMsg = "기기와 같은 번호를 입력해 주세요";
 
         if(errorMsg != "")
         {

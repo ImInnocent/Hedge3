@@ -60,7 +60,6 @@ public class TimeoutActivity extends Activity implements OnInitListener {
         int maxVol = am.getStreamMaxVolume(AudioManager.STREAM_ALARM);
         am.setStreamVolume(AudioManager.STREAM_ALARM, maxVol, AudioManager.FLAG_PLAY_SOUND);
 
-
         Intent intent = getIntent(); // 값을 받아온다.
         mWeatherAlarm = intent.getBooleanExtra("weather_alarm", true);
         mtitle = intent.getExtras().getString("title", "null");
@@ -211,10 +210,10 @@ public class TimeoutActivity extends Activity implements OnInitListener {
 
     @Override
     protected void onDestroy(){
-        SharedPreferences pref = getSharedPreferences("isAlarming", 0);
-        SharedPreferences.Editor edit = pref.edit();
-        edit.putBoolean("isAlarming", false);
-        edit.commit();
+//        SharedPreferences pref = getSharedPreferences("isAlarming", 0);
+//        SharedPreferences.Editor edit = pref.edit();
+//        edit.putBoolean("isAlarming", false);
+//        edit.commit();
     }
 
     public void SpeeachWeather()
