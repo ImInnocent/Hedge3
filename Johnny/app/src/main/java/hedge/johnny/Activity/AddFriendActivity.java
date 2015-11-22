@@ -4,9 +4,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +31,7 @@ import hedge.johnny.R;
 /**
  * Created by Administrator on 2015-07-21.
  */
+
 public class AddFriendActivity extends NavigationActivity implements OnClickListener {
     EditText friend_id;
     Button add_friend;
@@ -37,14 +41,43 @@ public class AddFriendActivity extends NavigationActivity implements OnClickList
     //to_me가 내게 온 요청, to_him이 내가 보낸 요청
     ArrayList<String[]> to_me, to_him;
 
-    ArrayList mSelectedItems;
+    ArrayList<Integer> mSelectedItems;
+    ArrayList<String> mPhoneList;
+
+    final int TYPE_PHONENUM = 1;
+    final int TYPE_NAME = 2;
+
 
     void  launchAddItems() {
-        mSelectedItems = new ArrayList();
-        final String items[] = {"Android","Iphone","Nokia"};
+        ArrayList<String> numList;
+        numList = getContactList(TYPE_PHONENUM);
+        mPhoneList.clear();
+
+        JSONObject jsonObject = new JSONObject();
+        for(int i=0; i < numList.size(); i++)
+            HedgeHttpClient.addValues(jsonObject, "phone_list", numList.get(i));
+
+        jsonObject = HedgeHttpClient.HedgeRequest("get_phone_list", jsonObject);
+        numList.clear();
+
+        for(int i=0; i < jsonObject.length() - 1; i++){
+            String s[] = HedgeHttpClient.getValues(jsonObject, String.valueOf(i)).split(",");
+            mPhoneList.add(s[1]);
+            numList.add(s[0] + "(" + s[1] + ")");
+        }
+
+
+        //if(mPhoneList.isEmpty())
+        //    mPhoneList= getSelectedList(numList);
+
+        if(!mSelectedItems.isEmpty())
+            mSelectedItems.clear();
+
+        String items[] = new String[numList.size()];
+        items = numList.toArray(items);
 
         AlertDialog.Builder ab=new AlertDialog.Builder(getParent());
-        ab.setTitle("Dialog Title")
+        ab.setTitle("친구 추가")
                 .setMultiChoiceItems(items, null,  new DialogInterface.OnMultiChoiceClickListener(){
 
                     @Override
@@ -62,17 +95,88 @@ public class AddFriendActivity extends NavigationActivity implements OnClickList
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked OK, so save the mSelectedItems results somewhere
                 // or return them to the component that opened the dialog
+
+                for(int i=0; i < mSelectedItems.size(); i++){
+                    int sp = mSelectedItems.get(i);
+                    JSONObject jsonObject = new JSONObject();
+                    //HedgeHttpClient.addValues();
+                    HedgeHttpClient.addValues(jsonObject, "friendid", mPhoneList.get(sp));
+                    jsonObject = HedgeHttpClient.HedgeRequest("request_friend", jsonObject);
+                }
             }
         }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
+                mSelectedItems.clear();
             }
         });
 
         ab.create();;
-
-
         ab.show();
+    }
+
+    private ArrayList<String> getSelectedList(ArrayList list) {
+        Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+
+        String[] projection = new String[] {
+                ContactsContract.CommonDataKinds.Phone.NUMBER,
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME}; // 연락처 이름.
+
+        String[] selectionArgs = null;
+
+        String sortOrder = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
+                + " COLLATE LOCALIZED ASC";
+
+        Cursor contactCursor = managedQuery(uri, projection, null,
+                selectionArgs, sortOrder);
+
+        ArrayList<String> nameList = new ArrayList<String>();
+        ArrayList<String> phoneList = new ArrayList<String>();
+
+        if (contactCursor.moveToFirst()) {
+            do {
+                nameList.add(contactCursor.getString(1));
+                phoneList.add(contactCursor.getString(0));
+
+            } while (contactCursor.moveToNext());
+        }
+
+        ArrayList<String> contactlist = new ArrayList<String>();
+
+        int idx = 0;
+        for(int i=0; i < nameList.size(); i++){
+            if(phoneList.get(idx).equals(phoneList.get(i))){
+                contactlist.add(nameList.get(idx));
+                idx++;
+            }
+        }
+
+        return contactlist;
+    }
+
+    private ArrayList<String> getContactList(int type) {
+        Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+
+        String[] projection = new String[] {
+                ContactsContract.CommonDataKinds.Phone.NUMBER }; // 연락처 이름.
+
+        String[] selectionArgs = null;
+
+        String sortOrder = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
+                + " COLLATE LOCALIZED ASC";
+
+        Cursor contactCursor = managedQuery(uri, projection, null,
+                selectionArgs, sortOrder);
+
+        ArrayList<String> contactlist = new ArrayList<String>();
+
+        if (contactCursor.moveToFirst()) {
+            do {
+                contactlist.add(contactCursor.getString(0));
+            } while (contactCursor.moveToNext());
+        }
+
+        return contactlist;
     }
 
     @Override
@@ -82,6 +186,8 @@ public class AddFriendActivity extends NavigationActivity implements OnClickList
         friend_id = (EditText)findViewById(R.id.friend_id);
         add_friend = (Button)findViewById(R.id.add_friend);
         add_friend.setOnClickListener(this);
+        mSelectedItems = new ArrayList();
+        mPhoneList = new ArrayList<String>();
 
         //리스트 init
         list1 = (ListView)findViewById(R.id.friend_to_him);
@@ -91,7 +197,6 @@ public class AddFriendActivity extends NavigationActivity implements OnClickList
         list1.setDividerHeight(5);
         list2.setDivider(new ColorDrawable(Color.WHITE)); // 리스트내 아이템간 경계선
         list2.setDividerHeight(5);
-
 
         to_him = new ArrayList<String[]>();
         to_me = new ArrayList<String[]>();
