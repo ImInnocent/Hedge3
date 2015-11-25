@@ -49,23 +49,6 @@ public class InitialActivity extends Activity {
                 String pw = pref.getString("password", "");
                 HedgeHttpClient.GetInstance().SetAccount(id,pw);
 
-/// 임시 시작
-                JSONObject jsonObject2 = new JSONObject();
-                //SharedPreferences pref = getSharedPreferences("HedgeMembers", 0);
-                String loc = pref.getString("weather_area", "Error");
-                if(loc.equals("Error"))
-                {
-                    loc = "Seoul";
-                }
-                HedgeHttpClient.addValues(jsonObject2,"loc","Ullungdo");
-                jsonObject2 = HedgeHttpClient.HedgeRequest("get_forecast",jsonObject2);
-
-               String locName = HedgeHttpClient.getValues(jsonObject2,"loc");
-               JSONObject forecast = HedgeHttpClient.getObject(jsonObject2, "forecast");
-               forecast = HedgeHttpClient.getObject(forecast, "0");
-/// 임시 끝
-
-
                 //if(true)
                 if(id.equals("")==false && pw.equals("")==false) //  저장된 아이디가 있음
                 {

@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Timer;
@@ -43,13 +44,80 @@ public class TimeoutActivity extends Activity implements OnInitListener {
     Timer timer = new Timer(true);
     float volume = 1.f;
     float time = 0.0f;
+    int high;
+    int low;
+    int curr;
+    String locName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences pref = getSharedPreferences("isAlarming", 0);
-        SharedPreferences.Editor edit = pref.edit();
+        SharedPreferences pref = getSharedPreferences("HedgeMembers", 0);
+        String engWeather[] = {"Kangnung",
+                "Kwangju",
+                "Kunsan",
+                "Kimch'on",
+                "Taegwallyong",
+                "Taegu",
+                "Taejon",
+                "Tonghae",
+                "Masan",
+                "Mokp'o",
+                "Miryang",
+                "Polgyo",
+                "Pusan",
+                "Sogwipo",
+                "Sosan",
+                "Seoul",
+                "Songnam",
+                "Sokcho",
+                "Suwon",
+                "Andong",
+                "Anyang",
+                "Yangyang",
+                "Yosu",
+                "Yongwol",
+                "Osan",
+                "Wando",
+                "Ullungdo",
+                "Ulsan",
+                "Ulchin",
+                "Wonju",
+                "Uisong",
+                "Iri",
+                "Inch'on",
+                "Chonju",
+                "Cheju",
+                "ChejuUpper",
+                "Chinju",
+                "Chinhae",
+                "Ch'angwon",
+                "Ch'onan",
+                "Cholwon",
+                "Chupungnyong",
+                "Chunchon",
+                "Chungmu",
+                "Ch'ungju",
+                "Pohang",
+                "Haenam"};
+        JSONObject jsonObject2 = new JSONObject();
+        //SharedPreferences pref = getSharedPreferences("HedgeMembers", 0);
+        int loc = pref.getInt("weather_area", 15);
+        String engLoc = engWeather[loc];
+        HedgeHttpClient.addValues(jsonObject2,"loc",engLoc);
+        jsonObject2 = HedgeHttpClient.HedgeRequest("get_forecast", jsonObject2);
+
+        locName = HedgeHttpClient.getValues(jsonObject2, "loc");
+        JSONObject forecast = HedgeHttpClient.getObject(jsonObject2, "forecast");
+        forecast = HedgeHttpClient.getObject(forecast, "0");
+        high = (int)((float)(Integer.parseInt(HedgeHttpClient.getValues(forecast, "high")) - 32) / 1.8f);
+        low = (int)((float)(Integer.parseInt(HedgeHttpClient.getValues(forecast, "low")) - 32) / 1.8f);
+        curr = (int)((float)(Integer.parseInt(HedgeHttpClient.getValues(jsonObject2, "curr").substring(0, 2)) - 32) / 1.8f);
+
+
+        SharedPreferences prefs = getSharedPreferences("isAlarming", 0);
+        SharedPreferences.Editor edit = prefs.edit();
         edit.putBoolean("isAlarming", true);
         edit.commit();
 
@@ -175,6 +243,15 @@ public class TimeoutActivity extends Activity implements OnInitListener {
             String strMinute= sdfMinute.format(date);
             nowTimeMinute.setText(strMinute);
 
+            TextView curTemp = (TextView)findViewById(R.id.timeout_weather_curr);
+            curTemp.setText(String.valueOf(curr) + "º");
+
+            TextView highTemp = (TextView)findViewById(R.id.timeout_weather_high);
+            highTemp.setText(String.valueOf(high) + "º");
+
+            TextView lowTemp = (TextView)findViewById(R.id.timeout_weather_low);
+            lowTemp.setText(String.valueOf(low) + "º");
+
             TextView alarmTitle = (TextView)findViewById(R.id.timeout_weather_msg);
             alarmTitle.setText(mtitle);
 
@@ -223,24 +300,24 @@ public class TimeoutActivity extends Activity implements OnInitListener {
     public void SpeeachWeather()
     {
         JSONObject jsonObject = new JSONObject();
-        SharedPreferences pref = getSharedPreferences("HedgeMembers", 0);
 
-        //// error 나는 소스코드
-        String loc = pref.getString("weather_area", "Error");
-        if(loc.equals("Error"))
-        {
-            loc = "Seoul";
-        }
-        HedgeHttpClient.addValues(jsonObject,"loc",loc);
-        jsonObject = HedgeHttpClient.HedgeRequest("get_forecast",jsonObject);
-        /////
+
+        /// 임시 시작
+
+/// 임시 끝
+
         user_volume = am.getStreamVolume(AudioManager.STREAM_MUSIC);
         int maxVol = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         am.setStreamVolume(AudioManager.STREAM_MUSIC, maxVol, AudioManager.FLAG_PLAY_SOUND);
 
-        String temp = "10월 27일, " + "6" + "시의 "+ loc +" 날씨는, 맑음입니다. ";
+        String temp = Calendar.getInstance().get(Calendar.MONTH) + "월 " +
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "일, " +
+                Calendar.getInstance().get(Calendar.HOUR_OF_DAY)+ "시의 "+ locName +"에서의 날씨는, 맑음입니다. ";
         myTTS.speak(temp, TextToSpeech.QUEUE_FLUSH, null);
-        temp = ", 기온은 섭씨 13도, 최저기온은 12도, 최고기온은 16도, 입니다.";
+        temp = ", 기온은 섭씨 " +
+                curr + "도, 최저기온은 " +
+                low + "도, 최고기온은 " +
+                high + "도, 입니다.";
         myTTS.speak(temp, TextToSpeech.QUEUE_ADD, null);
     }
 
