@@ -210,6 +210,7 @@ public class TimeoutActivity extends Activity implements OnInitListener {
 
     @Override
     protected void onDestroy(){
+        super.onDestroy();
 //        SharedPreferences pref = getSharedPreferences("isAlarming", 0);
 //        SharedPreferences.Editor edit = pref.edit();
 //        edit.putBoolean("isAlarming", false);
