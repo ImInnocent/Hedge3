@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,6 +27,7 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import hedge.johnny.HedgeObject.HttpClient.HedgeHttpClient;
 import hedge.johnny.R;
 
 public class TimeoutActivity extends Activity implements OnInitListener {
@@ -219,11 +222,23 @@ public class TimeoutActivity extends Activity implements OnInitListener {
 
     public void SpeeachWeather()
     {
+        JSONObject jsonObject = new JSONObject();
+        SharedPreferences pref = getSharedPreferences("HedgeMembers", 0);
+
+        //// error 나는 소스코드
+        String loc = pref.getString("weather_area", "Error");
+        if(loc.equals("Error"))
+        {
+            loc = "Seoul";
+        }
+        HedgeHttpClient.addValues(jsonObject,"loc",loc);
+        jsonObject = HedgeHttpClient.HedgeRequest("get_forecast",jsonObject);
+        /////
         user_volume = am.getStreamVolume(AudioManager.STREAM_MUSIC);
         int maxVol = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         am.setStreamVolume(AudioManager.STREAM_MUSIC, maxVol, AudioManager.FLAG_PLAY_SOUND);
 
-        String temp = "10월 27일, " + "6" + "시의 서울 날씨는, 맑음입니다. ";
+        String temp = "10월 27일, " + "6" + "시의 "+ loc +" 날씨는, 맑음입니다. ";
         myTTS.speak(temp, TextToSpeech.QUEUE_FLUSH, null);
         temp = ", 기온은 섭씨 13도, 최저기온은 12도, 최고기온은 16도, 입니다.";
         myTTS.speak(temp, TextToSpeech.QUEUE_ADD, null);
