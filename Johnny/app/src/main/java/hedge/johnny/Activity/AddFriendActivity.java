@@ -216,6 +216,8 @@ public class AddFriendActivity extends NavigationActivity implements OnClickList
 
     private void Invalidate()
     {
+        to_me.clear();
+        to_him.clear();
         SharedPreferences pref = getSharedPreferences("HedgeMembers", 0);
         String id = pref.getString("userid", "None");
         String pw = pref.getString("password", "None");
