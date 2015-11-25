@@ -99,10 +99,11 @@ public class AddFriendActivity extends NavigationActivity implements OnClickList
                 for(int i=0; i < mSelectedItems.size(); i++){
                     int sp = mSelectedItems.get(i);
                     JSONObject jsonObject = new JSONObject();
-                    //HedgeHttpClient.addValues();
                     HedgeHttpClient.addValues(jsonObject, "friendid", mPhoneList.get(sp));
                     jsonObject = HedgeHttpClient.HedgeRequest("request_friend", jsonObject);
                 }
+
+                Invalidate();
             }
         }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
