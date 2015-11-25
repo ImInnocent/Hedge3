@@ -53,9 +53,9 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
 
         pref = getSharedPreferences("HedgeMembers", 0);
         edit = pref.edit();
-        selectAreaNum = pref.getInt("WeatherArea", -1);
+        selectAreaNum = pref.getInt("weather_area", -1);
         if(selectAreaNum == -1) {
-            edit.putInt("WeatherArea", 15);      // default값 = 서울
+            edit.putInt("weather_area", 15);      // default값 = 서울
             edit.commit();
         }
         else
@@ -93,7 +93,7 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(getApplicationContext(), "Selected " + areaData[position], Toast.LENGTH_SHORT).show();
-        edit.putInt("WeatherArea", position);      // default값 = 서울
+        edit.putInt("weather_area", position);      // default값 = 서울
         edit.commit();
     }
 
