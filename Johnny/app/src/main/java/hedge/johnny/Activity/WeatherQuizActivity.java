@@ -92,7 +92,7 @@ public class WeatherQuizActivity  extends Activity {
 
                 // 입력한 문자열과 정답이 일치한다면~
                 if(hint.equals(input)){
-                    if(!input.equals("구름")){
+                    if(!input.equals("눈옴")){
                         Toast.makeText(getApplicationContext(), "틀렸습니다", Toast.LENGTH_SHORT).show();
                         break;
                     }

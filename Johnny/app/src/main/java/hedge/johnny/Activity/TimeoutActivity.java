@@ -48,6 +48,7 @@ public class TimeoutActivity extends Activity implements OnInitListener {
     int low;
     int curr;
     String locName;
+    String weather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +112,19 @@ public class TimeoutActivity extends Activity implements OnInitListener {
         locName = HedgeHttpClient.getValues(jsonObject2, "loc");
         JSONObject forecast = HedgeHttpClient.getObject(jsonObject2, "forecast");
         forecast = HedgeHttpClient.getObject(forecast, "0");
+        String eWeather = HedgeHttpClient.getValues(forecast, "condition");
+        if(eWeather.equals("Partly Cloud") || eWeather.equals("Cloud")){
+            weather = "구름";
+        }
+        else if(eWeather.equals("Rainy")){
+            weather = "비옴";
+        }
+        else if(eWeather.equals("Sunny")){
+            weather = "맑음";
+        }
+        else if(eWeather.equals("Snowy")){
+            weather = "눈옴";
+        }
         high = (int)((float)(Integer.parseInt(HedgeHttpClient.getValues(forecast, "high")) - 32) / 1.8f);
         low = (int)((float)(Integer.parseInt(HedgeHttpClient.getValues(forecast, "low")) - 32) / 1.8f);
         curr = (int)((float)(Integer.parseInt(HedgeHttpClient.getValues(jsonObject2, "curr").substring(0, 2)) - 32) / 1.8f);
@@ -217,6 +231,7 @@ public class TimeoutActivity extends Activity implements OnInitListener {
             case R.id.btn_goto_weatherquiz:
                 Intent i = new Intent(TimeoutActivity.this, WeatherQuizActivity.class);
                 i.putExtra("user_volume", user_volume);
+                i.putExtra("weather", weather);
                 startActivity(i);
                 finish();
                 break;
@@ -301,10 +316,9 @@ public class TimeoutActivity extends Activity implements OnInitListener {
     {
         JSONObject jsonObject = new JSONObject();
 
-
-        /// 임시 시작
-
-/// 임시 끝
+        String sCurr = curr < 0 ? "영하 " + String.valueOf(-curr) : String.valueOf(curr);
+        String sLow = low < 0 ? "영하 " + String.valueOf(-low) : String.valueOf(low);
+        String sHigh = high < 0 ? "영하 " + String.valueOf(-high) : String.valueOf(high);
 
         user_volume = am.getStreamVolume(AudioManager.STREAM_MUSIC);
         int maxVol = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
@@ -312,12 +326,12 @@ public class TimeoutActivity extends Activity implements OnInitListener {
 
         String temp = Calendar.getInstance().get(Calendar.MONTH) + "월 " +
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "일, " +
-                Calendar.getInstance().get(Calendar.HOUR_OF_DAY)+ "시의 "+ locName +"에서의 날씨는, 맑음입니다. ";
+                (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + 1) + "시의 "+ locName +"에서의 날씨는, 눈옴입니다. ";
         myTTS.speak(temp, TextToSpeech.QUEUE_FLUSH, null);
         temp = ", 기온은 섭씨 " +
-                curr + "도, 최저기온은 " +
-                low + "도, 최고기온은 " +
-                high + "도, 입니다.";
+                sCurr + "도, 최저기온은 섭씨 " +
+                sLow + "도, 최고기온은 섭씨" +
+                sHigh + "도, 입니다.";
         myTTS.speak(temp, TextToSpeech.QUEUE_ADD, null);
     }
 
